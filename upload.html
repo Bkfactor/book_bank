@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Material · Lead City Book Bank</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="upload">
+
+<div id="nav-slot"></div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-hero-badge">Academic Directors</span>
+    <h1>Submit a <span>Study Material</span></h1>
+    <p>Contribute course notes, past questions, textbooks or slides for your department.</p>
+  </div>
+</section>
+
+<div class="container">
+  <section class="section">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+
+      <!-- LEFT: STEPS -->
+      <div id="guidelines">
+        <h2 style="color:var(--blue-dark);margin-bottom:24px">How it works</h2>
+
+        <div style="display:flex;flex-direction:column;gap:20px" id="directors">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="step-dot" style="margin-top:2px;width:32px;height:32px;font-size:14px;background:var(--blue);border:none;color:white">1</div>
+            <div>
+              <h4 style="font-family:'Poppins',sans-serif;color:var(--blue-dark);margin-bottom:4px">Upload file to Google Drive</h4>
+              <p style="font-size:13.5px">Upload your material to Google Drive and set sharing to <strong>"Anyone with the link can view"</strong>. Copy the shareable link.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="step-dot" style="margin-top:2px;width:32px;height:32px;font-size:14px;background:var(--blue);border:none;color:white">2</div>
+            <div>
+              <h4 style="font-family:'Poppins',sans-serif;color:var(--blue-dark);margin-bottom:4px">Fill the submission form</h4>
+              <p style="font-size:13.5px">Complete the form with the course code, title, faculty, department, level and semester. Paste your Drive link.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="step-dot" style="margin-top:2px;width:32px;height:32px;font-size:14px;background:var(--pink);border:none;color:white">3</div>
+            <div>
+              <h4 style="font-family:'Poppins',sans-serif;color:var(--blue-dark);margin-bottom:4px">Goes live for students</h4>
+              <p style="font-size:13.5px">After a quick review, the material is added to the Book Bank and becomes accessible to all students in that department.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:36px;padding:20px 24px;background:var(--blue-light);border-radius:var(--radius-md);border-left:3px solid var(--blue)">
+          <h4 style="font-family:'Poppins',sans-serif;color:var(--blue-dark);margin-bottom:8px">File naming guide</h4>
+          <p style="font-size:13px;color:var(--gray-600)">Use this format for Drive file names:</p>
+          <code style="display:block;margin-top:10px;padding:10px 14px;background:var(--white);border-radius:6px;font-size:13px;color:var(--blue-dark);border:1px solid var(--gray-200)">
+            [COURSE CODE] [TYPE] [SEMESTER] [YEAR]<br>
+            e.g. CSC 302 Past Questions S1 2024
+          </code>
+        </div>
+      </div>
+
+      <!-- RIGHT: GOOGLE FORM EMBED / CTA -->
+      <div style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:var(--radius-lg);padding:32px;text-align:center">
+        <div style="width:64px;height:64px;background:var(--pink-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px">📤</div>
+        <h3 style="font-family:'Poppins',sans-serif;color:var(--blue-dark);margin-bottom:10px">Ready to submit?</h3>
+        <p style="font-size:13.5px;color:var(--gray-600);margin-bottom:24px">The submission form is hosted on Google Forms. It takes less than 2 minutes to fill.</p>
+        <a href="https://forms.google.com/REPLACE_WITH_FORM_LINK" target="_blank" class="btn-pink" style="display:block;text-align:center">Open Submission Form →</a>
+
+        <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--gray-200)">
+          <p style="font-size:12px;color:var(--gray-400);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em">Who can submit?</p>
+          <div style="display:flex;flex-direction:column;gap:8px;text-align:left">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--gray-600)">
+              <span style="color:var(--pink)">✓</span> Departmental Academic Directors
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--gray-600)">
+              <span style="color:var(--pink)">✓</span> Faculty Student Representatives
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--gray-600)">
+              <span style="color:var(--pink)">✓</span> NACOS Executive Members
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<div id="footer-slot"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead City Book Bank · Academic Resources for LCU Students</title>
+<meta name="description" content="Find course notes, past questions, textbooks and study materials for all faculties at Lead City University.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="index">
+
+<div id="nav-slot"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+
+  <div class="hero-badge">
+    <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#E8198A"/></svg>
+    Lead City University · Student Resource Platform
+  </div>
+
+  <h1>Your Academic<br><span>Book Bank</span></h1>
+  <p class="hero-sub">Course notes, past questions, textbooks and slides — organised by faculty and department, built by students for students.</p>
+
+  <div class="hero-search-wrap">
+    <input type="text" id="hero-search-input" placeholder="Search by course code, title, or department…">
+    <button id="hero-search-btn">Search</button>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <span class="stat-num" id="total-materials">0</span>
+      <span class="stat-label">Materials</span>
+    </div>
+    <div>
+      <span class="stat-num" id="total-faculties">0</span>
+      <span class="stat-label">Faculties</span>
+    </div>
+    <div>
+      <span class="stat-num" id="total-depts">0</span>
+      <span class="stat-label">Departments</span>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTIES -->
+<div class="container">
+  <section class="section" id="faculties">
+    <div class="section-head">
+      <h2>Browse by <span>Faculty</span></h2>
+    </div>
+    <div class="faculty-grid" id="faculty-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- RECENT MATERIALS -->
+  <section class="section" id="recent">
+    <div class="section-head">
+      <h2>Recently <span>Added</span></h2>
+      <a href="search.html?q=all" class="see-all">See all →</a>
+    </div>
+
+    <div class="filter-row" id="type-filter">
+      <button class="filter-tab active" data-type="all">All</button>
+      <button class="filter-tab" data-type="notes">Course Notes</button>
+      <button class="filter-tab" data-type="past">Past Questions</button>
+      <button class="filter-tab" data-type="text">Textbooks</button>
+      <button class="filter-tab" data-type="slides">Slides</button>
+    </div>
+
+    <div class="notice">
+      📌 &nbsp;All materials open directly from Google Drive. No login required to view or download.
+    </div>
+
+    <div class="resource-grid" id="recent-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- BROWSE BY LEVEL -->
+  <section class="section" id="levels">
+    <div class="section-head">
+      <h2>Browse by <span>Level</span></h2>
+    </div>
+    <div class="level-grid">
+      <a href="search.html?q=100" class="level-card">
+        <span class="lc-num">100</span>
+        <span class="lc-label">Level</span>
+      </a>
+      <a href="search.html?q=200" class="level-card">
+        <span class="lc-num">200</span>
+        <span class="lc-label">Level</span>
+      </a>
+      <a href="search.html?q=300" class="level-card">
+        <span class="lc-num">300</span>
+        <span class="lc-label">Level</span>
+      </a>
+      <a href="search.html?q=400" class="level-card">
+        <span class="lc-num">400</span>
+        <span class="lc-label">Level</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- UPLOAD CTA -->
+  <div class="upload-section">
+    <div>
+      <h2>Are you an <span>Academic Director?</span></h2>
+      <p>Submit course materials, past questions and resources through our simple form. Materials go live once reviewed.</p>
+      <div class="upload-steps">
+        <div class="upload-step"><div class="step-dot">1</div> Fill the form</div>
+        <div class="upload-step"><div class="step-dot">2</div> Attach your Google Drive link</div>
+        <div class="upload-step"><div class="step-dot">3</div> Goes live for students</div>
+      </div>
+    </div>
+    <a href="upload.html" class="btn-pink">Submit Material →</a>
+  </div>
+</div>
+
+<div id="footer-slot"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
