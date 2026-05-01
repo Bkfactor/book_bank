@@ -204,17 +204,30 @@ function initFaculty() {
     '<a href="index.html#faculties">Faculties</a><span class="sep">›</span>' +
     '<span class="current">' + faculty.name + '</span></div>';
 
+  var facultyDriveLink = faculty.drive_id ? driveFolder(faculty.drive_id) : DRIVE_ROOT;
   var totalMaterials = RESOURCES.filter(function(r) { return r.faculty_slug === slug; }).length;
   document.getElementById('faculty-hero').innerHTML =
-    '<div class="page-hero-inner">' +
-    '<span class="page-hero-badge">' + faculty.shortName + '</span>' +
-    '<h1>' + faculty.icon + ' ' + faculty.name + '</h1>' +
-    '<p>' + faculty.description + '</p>' +
-    '<div class="page-hero-meta">' +
-      '<span class="meta-pill">📚 ' + faculty.degree + '</span>' +
-      '<span class="meta-pill">🏛️ ' + faculty.departments.length + ' Departments</span>' +
-      (totalMaterials > 0 ? '<span class="meta-pill">📄 ' + totalMaterials + ' Materials</span>' : '') +
-    '</div></div>';
+    '<div class="page-hero-inner" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px">' +
+      '<div>' +
+        '<span class="page-hero-badge">' + faculty.shortName + '</span>' +
+        '<h1>' + faculty.icon + ' ' + faculty.name + '</h1>' +
+        '<p>' + faculty.description + '</p>' +
+        '<div class="page-hero-meta">' +
+          '<span class="meta-pill">📚 ' + faculty.degree + '</span>' +
+          '<span class="meta-pill">🏛️ ' + faculty.departments.length + ' Departments</span>' +
+          (totalMaterials > 0 ? '<span class="meta-pill">📄 ' + totalMaterials + ' Materials</span>' : '') +
+        '</div>' +
+      '</div>' +
+      '<a href="' + facultyDriveLink + '" target="_blank" rel="noopener" ' +
+        'style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);' +
+        'border:1.5px solid rgba(255,255,255,0.25);color:white;padding:10px 20px;border-radius:8px;' +
+        'font-size:13px;font-weight:600;font-family:\'Poppins\',sans-serif;white-space:nowrap;text-decoration:none;margin-top:4px" ' +
+        'onmouseover="this.style.background=\'rgba(255,255,255,0.2)\'" ' +
+        'onmouseout="this.style.background=\'rgba(255,255,255,0.12)\'">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' +
+        'Open Faculty Drive' +
+      '</a>' +
+    '</div>';
 
   var isPink = faculty.accentPink;
   var container = document.getElementById('dept-container');
@@ -275,15 +288,30 @@ function initDepartment() {
   // Duration badge text
   var durText = durationYears + '-Year Programme';
 
+  var deptDriveLink = dept.drive_id ? driveFolder(dept.drive_id) : DRIVE_ROOT;
+
   document.getElementById('dept-hero').innerHTML =
-    '<div class="page-hero-inner">' +
-    '<span class="page-hero-badge">' + faculty.shortName + ' · ' + durText + '</span>' +
-    '<h1>' + dept.name + '</h1>' +
-    '<p>' + faculty.name + '</p>' +
-    '<div class="page-hero-meta">' +
-      '<span class="meta-pill">📅 ' + durationYears + ' Years</span>' +
-      '<span class="meta-pill">📄 ' + allResources.length + ' Materials</span>' +
-    '</div></div>';
+    '<div class="page-hero-inner" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px">' +
+      '<div>' +
+        '<span class="page-hero-badge">' + faculty.shortName + ' · ' + durText + '</span>' +
+        '<h1>' + dept.name + '</h1>' +
+        '<p>' + faculty.name + '</p>' +
+        '<div class="page-hero-meta">' +
+          '<span class="meta-pill">📅 ' + durationYears + ' Years</span>' +
+          '<span class="meta-pill">📄 ' + allResources.length + ' Material' + (allResources.length !== 1 ? 's' : '') + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<a href="' + deptDriveLink + '" target="_blank" rel="noopener" ' +
+        'style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);' +
+        'border:1.5px solid rgba(255,255,255,0.25);color:white;padding:10px 20px;border-radius:8px;' +
+        'font-size:13px;font-weight:600;font-family:\'Poppins\',sans-serif;white-space:nowrap;' +
+        'transition:background 0.2s;text-decoration:none;margin-top:4px" ' +
+        'onmouseover="this.style.background=\'rgba(255,255,255,0.2)\'" ' +
+        'onmouseout="this.style.background=\'rgba(255,255,255,0.12)\'">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' +
+        'Open in Google Drive' +
+      '</a>' +
+    '</div>';
 
   // Dynamic level strip based on duration
   var levels = getLevelsForDuration(durationYears);
@@ -297,13 +325,19 @@ function initDepartment() {
 
   renderGrid('dept-resource-grid', allResources);
 
+  // Wire the Drive folder button in the bottom CTA
+  var driveBtn = document.getElementById('dept-drive-btn');
+  if (driveBtn) driveBtn.href = deptDriveLink;
+
   // Level filter
   document.querySelectorAll('#level-filter .filter-tab').forEach(function(btn) {
     btn.addEventListener('click', function() {
       document.querySelectorAll('#level-filter .filter-tab').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       var level = btn.dataset.level;
-      renderGrid('dept-resource-grid', level === 'all' ? allResources : allResources.filter(function(r) { return r.level === level; }));
+      renderGrid('dept-resource-grid', level === 'all'
+        ? allResources
+        : allResources.filter(function(r) { return String(r.level) === String(level); }));
     });
   });
 
@@ -323,10 +357,59 @@ function initSearch() {
   document.getElementById('nav-slot').innerHTML = buildNav();
   document.getElementById('footer-slot').innerHTML = buildFooter();
 
-  var q = param('q');
-  document.getElementById('search-query-display').innerHTML = 'Results for <span>"' + q + '"</span>';
+  var q     = param('q');
+  var level = param('level');
 
   var navInput = document.getElementById('nav-search-input');
+
+  // ── LEVEL BROWSE MODE (?level=100 / 200 / 300 / 400 / 500 / 600) ──────────
+  if (level) {
+    var levelNames = { "100":"100 Level","200":"200 Level","300":"300 Level",
+                       "400":"400 Level","500":"500 Level","600":"600 Level" };
+    var displayName = levelNames[level] || level + ' Level';
+
+    document.getElementById('search-query-display').innerHTML =
+      'Materials for <span>' + displayName + '</span>';
+
+    if (navInput) navInput.value = displayName;
+
+    var results = filterByLevel(level);
+    document.getElementById('search-count').textContent =
+      results.length + ' material' + (results.length !== 1 ? 's' : '') + ' found';
+
+    // If nothing yet, show a friendly empty state with a note
+    if (results.length === 0) {
+      document.getElementById('search-grid').innerHTML =
+        '<div class="empty-state">' +
+          '<div class="empty-state-icon">📂</div>' +
+          '<h3>No materials yet for ' + displayName + '</h3>' +
+          '<p>Materials will appear here as Academic Directors and course reps submit them.<br>' +
+          'You can help by submitting resources you already have.</p>' +
+          '<a href="upload.html" style="display:inline-block;margin-top:16px;background:var(--blue);color:white;' +
+          'padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;font-family:\'Poppins\',sans-serif;' +
+          'text-decoration:none">Submit a Material</a>' +
+        '</div>';
+    } else {
+      renderGrid('search-grid', results);
+    }
+    return;
+  }
+
+  // ── TEXT SEARCH MODE (?q=keyword) ─────────────────────────────────────────
+  if (!q) {
+    // No query at all — show everything
+    document.getElementById('search-query-display').innerHTML = 'All <span>Materials</span>';
+    if (navInput) navInput.value = '';
+    var all = RESOURCES.slice().reverse();
+    document.getElementById('search-count').textContent =
+      all.length + ' material' + (all.length !== 1 ? 's' : '') + ' available';
+    renderGrid('search-grid', all);
+    return;
+  }
+
+  document.getElementById('search-query-display').innerHTML =
+    'Results for <span>"' + q + '"</span>';
+
   if (navInput) navInput.value = q;
 
   var results = searchResources(q);

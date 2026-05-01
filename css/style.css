@@ -457,7 +457,7 @@ nav {
 /* ─── LEVEL CARDS ────────────────────────────────────────────────────────── */
 .level-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 14px;
 }
 
@@ -712,3 +712,27 @@ footer {
   border-bottom: 1px solid var(--gray-200);
 }
 .subgroup-label:first-child { margin-top: 0; }
+
+/* ─── LEVEL CARD NOTE (500L / 600L) ─────────────────────────────────────── */
+.lc-note {
+  font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--gray-400);
+  display: block; margin-top: 5px;
+  font-weight: 500;
+}
+
+.level-card--extended {
+  border-color: var(--pink);
+}
+.level-card--extended .lc-num { color: var(--pink); }
+.level-card--extended:hover { background: var(--pink); }
+.level-card--extended:hover .lc-num { color: var(--white); }
+.level-card--extended:hover .lc-note { color: rgba(255,255,255,0.65); }
+
+/* responsive: 3 cols on tablet, 2 on mobile */
+@media (max-width: 900px) {
+  .level-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .level-grid { grid-template-columns: repeat(2, 1fr); }
+}
