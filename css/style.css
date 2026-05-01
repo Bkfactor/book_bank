@@ -736,3 +736,8 @@ footer {
 @media (max-width: 640px) {
   .level-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ─── SPINNER ────────────────────────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

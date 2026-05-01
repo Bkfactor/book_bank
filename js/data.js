@@ -21,7 +21,7 @@ const FACULTIES = [
     degree: "B.Sc",
     icon: "🧪",
     accentPink: false,
-    description: "Sciences, computing, technology and environmental disciplines.",
+    description: "Study materials, past questions and lab reports across all levels — covering Computer Science, IT, Cyber Security, Biology, Chemistry and related programmes.",
     drive_id: "1AMFcGGdT8dswBLptKsJDyHBedjFb8IuH",
     departments: [
       { slug: "chemistry",              name: "Chemistry",                          duration: 4, drive_id: "1uViW7Z43ArYgFXuQxdccm6SrbPClukk6" },
@@ -48,7 +48,7 @@ const FACULTIES = [
     degree: "B.Eng",
     icon: "⚙️",
     accentPink: true,
-    description: "Engineering disciplines shaping infrastructure, electronics and technology.",
+    description: "Past questions, calculation notes and project resources for all engineering disciplines, including Civil, Electrical, Mechanical and Computer Engineering.",
     drive_id: "1peMRXqufqmXVvxfu0FcuspV002ttO4-R",
     departments: [
       { slug: "wood-products-eng",       name: "Wood Products Engineering",             duration: 5, drive_id: "1-h4G4tgzBz8wKi1tNN1OS-dbDNijANG9" },
@@ -66,7 +66,7 @@ const FACULTIES = [
     degree: "LLB / BLD",
     icon: "⚖️",
     accentPink: false,
-    description: "Legal education, diplomacy and international law studies.",
+    description: "Case summaries, statutes, past questions and revision materials for Law and Law & Diplomacy students.",
     drive_id: "1OGBD9sh-XuFhVveetCf5nEG11SEFczhb",
     departments: [
       { slug: "llb",           name: "Bachelor of Laws (LLB)", duration: 5, drive_id: "1zfdix8GPE6z6fwGFu0a430ubnOuTSAuk" },
@@ -80,7 +80,7 @@ const FACULTIES = [
     degree: "B.Sc",
     icon: "📊",
     accentPink: true,
-    description: "Business, economics, social sciences and management disciplines.",
+    description: "Lecture notes and past questions across Accounting, Business Administration, Economics, Sociology, Psychology, Tourism and related courses.",
     drive_id: "1QgdipQrXF8v_1jDpqBqcmsE8qE0m53gE",
     departments: [
       { slug: "accounting",           name: "Accounting",                             duration: 4, drive_id: "12CRp3_XeyWVEHlJ1i5HPE57qu6GCw6GX" },
@@ -106,7 +106,7 @@ const FACULTIES = [
     degree: "B.Sc",
     icon: "📡",
     accentPink: false,
-    description: "Mass communication, media, library and information management.",
+    description: "Study materials and past questions for Mass Communication, Journalism, Advertising, Library Science and related programmes.",
     drive_id: "1G_iwGwMMlxELrsDx90aHt400_gEbiqm-",
     departments: [
       { slug: "mass-communication",  name: "Mass Communication & Media Technology",    duration: 4, drive_id: "1DEZEtkvXl2KrTKpZB1sT4Se3BUY00-bx" },
@@ -128,7 +128,7 @@ const FACULTIES = [
     degree: "B.Sc / B.Arch",
     icon: "🏗️",
     accentPink: true,
-    description: "Architecture, planning, building and environmental management.",
+    description: "Technical notes, project resources and past questions for Architecture, Estate Management, Quantity Surveying and related courses.",
     drive_id: "1-jczQm9rH9dxMPnsww5p-Y7PoBDoEDsc",
     departments: [
       { slug: "architecture",             name: "Architecture",                  duration: 5, drive_id: "16pp00W_LXsu9LEJvSmu09aLjh1pBdSFO" },
@@ -146,7 +146,7 @@ const FACULTIES = [
     degree: "B.A",
     icon: "📚",
     accentPink: false,
-    description: "Language, literature, performing arts, film and religious studies.",
+    description: "Lecture materials, essays and past questions for English, Performing Arts and Religious Studies.",
     drive_id: "1RP2EpTZ_5ChHuCF5yrnGl2PHol8Uzwr-",
     departments: [
       { slug: "english-literary",     name: "English & Literary Studies",     duration: 4, drive_id: "1ScghG5cNsiSBIPR8O6Feyi_vWzXeNRFc" },
@@ -161,7 +161,7 @@ const FACULTIES = [
     degree: "B.Ed",
     icon: "🎓",
     accentPink: true,
-    description: "Teacher education across sciences, arts, technology and management.",
+    description: "Course notes, teaching frameworks and past questions across all Education disciplines, including Science, Arts and Business Education.",
     drive_id: "1O2IYhKUaeT7ErhER_nyWYJsuAstPJ1-1",
     departments: [
       { slug: "biology-edu",          name: "Biology Education",          duration: 4, drive_id: "1W-zUBkboKYhXYzjvxcNU1Ga3PdLAN6bZ" },
@@ -183,7 +183,7 @@ const FACULTIES = [
     degree: "MBBS / B.Sc",
     icon: "🩺",
     accentPink: false,
-    description: "Basic medical sciences, clinical sciences and public health programmes.",
+    description: "Study materials and revision resources covering Basic Medical Sciences, Clinical Sciences and Public Health programmes.",
     drive_id: "1rTuz1ZLGiE-mudSJdAnLhfrpN0ScnJrA",
     subgroups: [
       {
@@ -231,7 +231,7 @@ const FACULTIES = [
     degree: "Pharm.D",
     icon: "💊",
     accentPink: true,
-    description: "Pharmaceutical sciences, drug development and clinical pharmacy.",
+    description: "Pharmacology notes, past questions and structured study materials for Pharmacy students.",
     drive_id: "1R8PFt-3VvLe2HJmPo2_44A2r-grpiw6M",
     departments: [
       { slug: "pharmacy", name: "Pharmacy (Doctor of Pharmacy)", duration: 6, drive_id: "10kxbnCjnMFwDbV5I_yClD77jcUP47skF" }
@@ -239,12 +239,122 @@ const FACULTIES = [
   }
 ];
 
-// ─── RESOURCES ────────────────────────────────────────────────────────────────
-// Add entries here once materials are uploaded and approved.
-// type: "notes" | "past" | "text" | "slides" | "research"
-// drive_link: direct Google Drive file/folder shareable URL
+// ─── GOOGLE SHEETS LIVE DATABASE ─────────────────────────────────────────────
+// This is your live materials database.
+// To add a material: add a row to the Sheet — the website updates automatically.
+//
+// SHEET SETUP (do this once):
+// 1. Go to: https://docs.google.com/spreadsheets/
+// 2. Create a new sheet called "Lead City Book Bank — Materials"
+// 3. Set Row 1 as headers (exact spelling matters):
+//    id | title | course | type | level | faculty_slug | dept_slug | semester | uploaded | drive_link
+// 4. Share the sheet: File → Share → "Anyone with the link" → Viewer
+// 5. Copy the Sheet ID from the URL:
+//    docs.google.com/spreadsheets/d/  >>>SHEET_ID<<<  /edit
+// 6. Paste it below replacing PASTE_YOUR_SHEET_ID_HERE
 
-const RESOURCES = [];
+const SHEET_ID = "1NdQrFCj5x7ePyuO1GxHt-EABA4FjDSRIHOcd4Rn_6_8";
+
+// This is the URL that returns your sheet as a CSV — no API key needed
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/gviz/tq?tqx=out:csv&sheet=Sheet1";
+
+// In-memory cache — populated on page load from the Sheet
+var RESOURCES = [];
+var RESOURCES_LOADED = false;
+var RESOURCES_ERROR  = false;
+
+// Fetch and parse the Sheet CSV into RESOURCES
+function loadResourcesFromSheet(callback) {
+  if (RESOURCES_LOADED) { callback(RESOURCES); return; }
+
+  // If no Sheet ID set yet, just return empty
+  if (SHEET_ID === "PASTE_YOUR_SHEET_ID_HERE") {
+    RESOURCES = [];
+    RESOURCES_LOADED = true;
+    callback(RESOURCES);
+    return;
+  }
+
+  fetch(SHEET_CSV_URL)
+    .then(function(res) {
+      if (!res.ok) throw new Error("Sheet fetch failed: " + res.status);
+      return res.text();
+    })
+    .then(function(csv) {
+      RESOURCES = parseSheetCSV(csv);
+      RESOURCES_LOADED = true;
+      callback(RESOURCES);
+    })
+    .catch(function(err) {
+      console.warn("Book Bank: could not load materials sheet.", err);
+      RESOURCES = [];
+      RESOURCES_LOADED = true;
+      RESOURCES_ERROR  = true;
+      callback(RESOURCES);
+    });
+}
+
+// Parse Google Sheets CSV export into resource objects
+function parseSheetCSV(csv) {
+  var lines = csv.trim().split("\n");
+  if (lines.length < 2) return [];
+
+  // Parse a single CSV line respecting quoted fields
+  function parseLine(line) {
+    var result = [];
+    var current = "";
+    var inQuotes = false;
+    for (var i = 0; i < line.length; i++) {
+      var ch = line[i];
+      if (ch === '"') {
+        // Handle doubled quotes inside a quoted field ("")
+        if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+        else { inQuotes = !inQuotes; }
+      } else if (ch === ',' && !inQuotes) {
+        result.push(current.trim());
+        current = "";
+      } else {
+        current += ch;
+      }
+    }
+    result.push(current.trim());
+    return result;
+  }
+
+  var headers = parseLine(lines[0]).map(function(h) {
+    return h.replace(/^"|"$/g, '').trim().toLowerCase();
+  });
+
+  var resources = [];
+  for (var i = 1; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (!line) continue;
+    var values = parseLine(line);
+
+    var obj = {};
+    headers.forEach(function(header, idx) {
+      obj[header] = (values[idx] || "").replace(/^"|"$/g, '').trim();
+    });
+
+    // Skip rows with no title or drive_link
+    if (!obj.title || !obj.drive_link) continue;
+
+    resources.push({
+      id:           obj.id           || String(i),
+      title:        obj.title        || "",
+      course:       obj.course       || "",
+      type:         obj.type         || "notes",
+      level:        obj.level        || "",
+      faculty_slug: obj.faculty_slug || "",
+      dept_slug:    obj.dept_slug    || "",
+      semester:     obj.semester     || "",
+      uploaded:     obj.uploaded     || "",
+      drive_link:   obj.drive_link   || "#"
+    });
+  }
+
+  return resources;
+}
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 
