@@ -18,7 +18,7 @@
 
   <div class="hero-badge">
     <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#E8198A"/></svg>
-    Lead City University · Student Resource Platform
+    Lead City University · Student Ambassador Team
   </div>
 
   <h1>Your Academic<br><span>Book Bank</span></h1>
@@ -45,19 +45,18 @@
   </div>
 </section>
 
-<!-- FACULTIES -->
 <div class="container">
+
+  <!-- FACULTIES -->
   <section class="section" id="faculties">
     <div class="section-head">
       <h2>Browse by <span>Faculty</span></h2>
     </div>
-    <div class="faculty-grid" id="faculty-grid">
-      <!-- Rendered by JS -->
-    </div>
+    <div class="faculty-grid" id="faculty-grid"></div>
   </section>
 
-  <!-- RECENT MATERIALS -->
-  <section class="section" id="recent">
+  <!-- RECENTLY ADDED — only shown when RESOURCES.length > 0 via JS -->
+  <section class="section" id="recent-section">
     <div class="section-head">
       <h2>Recently <span>Added</span></h2>
       <a href="search.html?q=all" class="see-all">See all →</a>
@@ -75,9 +74,7 @@
       📌 &nbsp;All materials open directly from Google Drive. No login required to view or download.
     </div>
 
-    <div class="resource-grid" id="recent-grid">
-      <!-- Rendered by JS -->
-    </div>
+    <div class="resource-grid" id="recent-grid"></div>
   </section>
 
   <!-- BROWSE BY LEVEL -->
@@ -87,42 +84,57 @@
     </div>
     <div class="level-grid">
       <a href="search.html?q=100" class="level-card">
-        <span class="lc-num">100</span>
-        <span class="lc-label">Level</span>
+        <span class="lc-num">100</span><span class="lc-label">Level</span>
       </a>
       <a href="search.html?q=200" class="level-card">
-        <span class="lc-num">200</span>
-        <span class="lc-label">Level</span>
+        <span class="lc-num">200</span><span class="lc-label">Level</span>
       </a>
       <a href="search.html?q=300" class="level-card">
-        <span class="lc-num">300</span>
-        <span class="lc-label">Level</span>
+        <span class="lc-num">300</span><span class="lc-label">Level</span>
       </a>
       <a href="search.html?q=400" class="level-card">
-        <span class="lc-num">400</span>
-        <span class="lc-label">Level</span>
+        <span class="lc-num">400</span><span class="lc-label">Level</span>
       </a>
     </div>
   </section>
 
-  <!-- UPLOAD CTA -->
+  <!-- FEEDBACK BANNER -->
+  <div style="background:var(--blue-light);border:1.5px solid var(--gray-200);border-radius:var(--radius-lg);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap">
+    <div>
+      <h3 style="font-family:'Poppins',sans-serif;color:var(--blue-dark);margin-bottom:6px">Have an academic concern?</h3>
+      <p style="font-size:14px;max-width:480px">Report missing materials, difficult courses, or any academic challenge to the Student Ambassador Team. We review every submission.</p>
+    </div>
+    <a href="" id="feedback-banner-btn" target="_blank" style="display:inline-block;background:var(--blue);color:white;padding:12px 24px;border-radius:100px;font-size:13px;font-weight:600;font-family:'Poppins',sans-serif;white-space:nowrap">Send Feedback →</a>
+  </div>
+
+  <!-- SUBMIT CTA -->
   <div class="upload-section">
     <div>
       <h2>Are you an <span>Academic Director?</span></h2>
-      <p>Submit course materials, past questions and resources through our simple form. Materials go live once reviewed.</p>
+      <p>Submit course materials, past questions and resources through our simple form. All submissions are reviewed before going live.</p>
       <div class="upload-steps">
         <div class="upload-step"><div class="step-dot">1</div> Fill the form</div>
         <div class="upload-step"><div class="step-dot">2</div> Attach your Google Drive link</div>
         <div class="upload-step"><div class="step-dot">3</div> Goes live for students</div>
       </div>
     </div>
-    <a href="upload.html" class="btn-pink">Submit Material →</a>
+    <a href="" id="submit-cta-btn" target="_blank" class="btn-pink">Submit Material →</a>
   </div>
+
 </div>
 
 <div id="footer-slot"></div>
 
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script>
+  // Wire form links on index after data.js loads
+  document.addEventListener('DOMContentLoaded', function() {
+    var fb = document.getElementById('feedback-banner-btn');
+    if (fb) fb.href = FORM_FEEDBACK;
+    var sb = document.getElementById('submit-cta-btn');
+    if (sb) sb.href = FORM_SUBMIT;
+  });
+</script>
 </body>
 </html>

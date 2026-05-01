@@ -1,31 +1,54 @@
 // ─── LEAD CITY BOOK BANK · DATA ──────────────────────────────────────────────
-// Edit this file to add/remove faculties, departments, and resources.
+
+const DRIVE_ROOT     = "https://drive.google.com/drive/folders/1cUKueEo9bp9DnI34veQSO5bdsEAJklki";
+const FORM_SUBMIT    = "https://forms.gle/41Lh2WAYEGM4zG1x6";   // Material submission
+const FORM_FEEDBACK  = "https://forms.gle/xksioGRTY9YXJsP79";   // Feedback / complaints
+
+const FACULTY_DRIVES = {
+  "natural-applied-sciences":  null,
+  "engineering":               null,
+  "law":                       null,
+  "management-social":         null,
+  "information-communication": null,
+  "environmental-design":      null,
+  "arts":                      null,
+  "education":                 null,
+  "college-of-medicine":       null,
+  "pharmacy":                  null
+};
+
+function getDriveLink(id) {
+  return id ? "https://drive.google.com/drive/folders/" + id : DRIVE_ROOT;
+}
+
+// duration = number of years (4 | 5 | 6) — controls which level folders exist
+// 4 → 100–400L  |  5 → 100–500L  |  6 → 100–600L
 
 const FACULTIES = [
   {
-    slug: "applied-sciences",
-    name: "Faculty of Applied Sciences",
-    shortName: "FONAS",
+    slug: "natural-applied-sciences",
+    name: "Natural & Applied Sciences",
+    shortName: "NAS",
     degree: "B.Sc",
-    icon: "🔬",
-    accent: "#1B4FA8",
-    description: "Natural sciences, computing, technology and applied disciplines.",
+    icon: "🧪",
+    accentPink: false,
+    description: "Sciences, computing, technology and environmental disciplines.",
     departments: [
-      { slug: "chemistry", name: "Chemistry" },
-      { slug: "physics", name: "Physics" },
-      { slug: "physics-electronics", name: "Physics with Electronics" },
-      { slug: "biology", name: "Biology" },
-      { slug: "microbiology", name: "Microbiology" },
-      { slug: "science-lab-tech", name: "Science Laboratory Technology" },
-      { slug: "env-management", name: "Environmental Management & Toxicology" },
-      { slug: "cs-economics", name: "Computer Science with Economics" },
-      { slug: "cs-electronics", name: "Computer Science with Electronics" },
-      { slug: "computer-info-science", name: "Computer & Information Science" },
-      { slug: "information-technology", name: "Information Technology" },
-      { slug: "information-systems", name: "Information Systems" },
-      { slug: "forensic-science", name: "Forensic Science" },
-      { slug: "cyber-security", name: "Cyber Security" },
-      { slug: "software-engineering", name: "Software Engineering" }
+      { slug: "chemistry",              name: "Chemistry",                          duration: 4 },
+      { slug: "physics",                name: "Physics",                            duration: 4 },
+      { slug: "physics-electronics",    name: "Physics with Electronics",           duration: 4 },
+      { slug: "biology",                name: "Biology",                            duration: 4 },
+      { slug: "microbiology",           name: "Microbiology",                       duration: 4 },
+      { slug: "science-lab-tech",       name: "Science Laboratory Technology",      duration: 4 },
+      { slug: "env-management-tox",     name: "Environmental Management & Toxicology", duration: 4 },
+      { slug: "cs-economics",           name: "Computer Science with Economics",    duration: 4 },
+      { slug: "cs-electronics",         name: "Computer Science with Electronics",  duration: 4 },
+      { slug: "computer-info-science",  name: "Computer & Information Science",     duration: 4 },
+      { slug: "information-technology", name: "Information Technology",             duration: 4 },
+      { slug: "information-systems",    name: "Information Systems",                duration: 4 },
+      { slug: "forensic-science",       name: "Forensic Science",                   duration: 4 },
+      { slug: "cyber-security",         name: "Cyber Security",                     duration: 4 },
+      { slug: "software-engineering",   name: "Software Engineering",               duration: 4 }
     ]
   },
   {
@@ -34,15 +57,15 @@ const FACULTIES = [
     shortName: "FENG",
     degree: "B.Eng",
     icon: "⚙️",
-    accent: "#E8198A",
-    description: "Engineering disciplines shaping modern infrastructure and technology.",
+    accentPink: true,
+    description: "Engineering disciplines shaping infrastructure, electronics and technology.",
     departments: [
-      { slug: "wood-products-eng", name: "Wood Products Engineering" },
-      { slug: "electrical-electronics", name: "Electrical & Electronics Engineering" },
-      { slug: "telecommunications", name: "Telecommunications Engineering" },
-      { slug: "computer-engineering", name: "Computer Engineering" },
-      { slug: "civil-engineering", name: "Civil Engineering" },
-      { slug: "mechanical-engineering", name: "Mechanical Engineering" }
+      { slug: "wood-products-eng",       name: "Wood Products Engineering",              duration: 5 },
+      { slug: "electrical-electronics",  name: "Electrical & Electronics Engineering",   duration: 5 },
+      { slug: "telecommunications",      name: "Telecommunications Engineering",         duration: 5 },
+      { slug: "computer-engineering",    name: "Computer Engineering",                   duration: 5 },
+      { slug: "civil-engineering",       name: "Civil Engineering",                      duration: 5 },
+      { slug: "mechanical-engineering",  name: "Mechanical Engineering",                 duration: 5 }
     ]
   },
   {
@@ -51,201 +74,226 @@ const FACULTIES = [
     shortName: "FLAW",
     degree: "LLB / BLD",
     icon: "⚖️",
-    accent: "#1B4FA8",
-    description: "Legal education, diplomacy and international law.",
+    accentPink: false,
+    description: "Legal education, diplomacy and international law studies.",
     departments: [
-      { slug: "bachelor-of-laws", name: "Bachelor of Laws (LLB)" },
-      { slug: "law-diplomacy", name: "Law & Diplomacy (BLD)" }
+      { slug: "llb",            name: "Bachelor of Laws (LLB)",   duration: 5 },
+      { slug: "law-diplomacy",  name: "Law & Diplomacy (BLD)",    duration: 5 }
     ]
   },
   {
-    slug: "social-management",
-    name: "Faculty of Social & Management Sciences",
-    shortName: "FSMS",
+    slug: "management-social",
+    name: "Management & Social Sciences",
+    shortName: "MSS",
     degree: "B.Sc",
     icon: "📊",
-    accent: "#E8198A",
-    description: "Business, social sciences, and management disciplines.",
+    accentPink: true,
+    description: "Business, economics, social sciences and management disciplines.",
     departments: [
-      { slug: "accounting", name: "Accounting" },
-      { slug: "business-admin", name: "Business Administration" },
-      { slug: "economics", name: "Economics & Development Studies" },
-      { slug: "criminology", name: "Criminology & Security Studies" },
-      { slug: "politics", name: "Politics & International Relations" },
-      { slug: "banking-finance", name: "Banking & Finance" },
-      { slug: "entrepreneurship", name: "Entrepreneurship" },
-      { slug: "industrial-relations", name: "Industrial Relations & Human Resources" },
-      { slug: "marketing", name: "Marketing" },
-      { slug: "psychology", name: "Psychology" },
-      { slug: "sociology", name: "Sociology" },
-      { slug: "public-admin", name: "Public Administration" },
-      { slug: "info-media-studies", name: "Information Science & Media Studies" },
-      { slug: "social-work", name: "Social Work" },
-      { slug: "tourism-hospitality", name: "Tourism and Hospitality Management" },
-      { slug: "library-info-science", name: "Library and Information Science (B.LS)" }
+      { slug: "accounting",           name: "Accounting",                              duration: 4 },
+      { slug: "business-admin",       name: "Business Administration",                 duration: 4 },
+      { slug: "economics",            name: "Economics & Development Studies",         duration: 4 },
+      { slug: "criminology",          name: "Criminology & Security Studies",          duration: 4 },
+      { slug: "politics",             name: "Politics & International Relations",      duration: 4 },
+      { slug: "banking-finance",      name: "Banking & Finance",                       duration: 4 },
+      { slug: "entrepreneurship",     name: "Entrepreneurship",                        duration: 4 },
+      { slug: "industrial-relations", name: "Industrial Relations & Human Resources",  duration: 4 },
+      { slug: "marketing",            name: "Marketing",                               duration: 4 },
+      { slug: "psychology",           name: "Psychology",                              duration: 4 },
+      { slug: "sociology",            name: "Sociology",                               duration: 4 },
+      { slug: "public-admin",         name: "Public Administration",                   duration: 4 },
+      { slug: "social-work",          name: "Social Work",                             duration: 4 },
+      { slug: "tourism-hospitality",  name: "Tourism & Hospitality Management",        duration: 4 }
     ]
   },
   {
-    slug: "communication-info",
-    name: "Faculty of Communication & Information Science",
-    shortName: "FCIS",
+    slug: "information-communication",
+    name: "Information & Communication Sciences",
+    shortName: "ICS",
     degree: "B.Sc",
     icon: "📡",
-    accent: "#1B4FA8",
+    accentPink: false,
     description: "Mass communication, media, library and information management.",
     departments: [
-      { slug: "mass-communication", name: "Mass Communication & Media Tech." },
-      { slug: "library-archival", name: "Library, Archival & Information Studies" },
-      { slug: "office-info-mgt", name: "Office and Information Management" },
-      { slug: "health-info-mgt", name: "Health Information Management" }
+      { slug: "mass-communication",  name: "Mass Communication & Media Technology",       duration: 4 },
+      { slug: "public-relations",    name: "Public Relations",                            duration: 4 },
+      { slug: "journalism",          name: "Journalism",                                  duration: 4 },
+      { slug: "advertising",         name: "Advertising",                                 duration: 4 },
+      { slug: "media-studies",       name: "Media Studies",                               duration: 4 },
+      { slug: "printing-publishing", name: "Printing and Publishing",                     duration: 4 },
+      { slug: "library-archival",    name: "Library, Archival & Information Studies",     duration: 4 },
+      { slug: "office-info-mgt",     name: "Office and Information Management",           duration: 4 },
+      { slug: "health-info-mgt",     name: "Health Information Management",               duration: 4 },
+      { slug: "info-science-media",  name: "Information Science & Media Studies",         duration: 4 }
     ]
   },
   {
     slug: "environmental-design",
-    name: "Faculty of Environmental Design & Management",
+    name: "Environmental Design",
     shortName: "FEDM",
     degree: "B.Sc / B.Arch",
     icon: "🏗️",
-    accent: "#E8198A",
-    description: "Architecture, planning, building and environmental sciences.",
+    accentPink: true,
+    description: "Architecture, planning, building and environmental management.",
     departments: [
-      { slug: "architecture", name: "Architecture" },
-      { slug: "urban-regional-planning", name: "Urban and Regional Planning" },
-      { slug: "building", name: "Building" },
-      { slug: "estate-management", name: "Estate Management" },
-      { slug: "quantity-surveying", name: "Quantity Surveying" },
-      { slug: "surveying-geoinformatics", name: "Surveying and Geoinformatics" }
+      { slug: "architecture",              name: "Architecture",                   duration: 5 },
+      { slug: "urban-regional-planning",   name: "Urban and Regional Planning",    duration: 5 },
+      { slug: "building",                  name: "Building",                       duration: 5 },
+      { slug: "estate-management",         name: "Estate Management",              duration: 5 },
+      { slug: "quantity-surveying",        name: "Quantity Surveying",             duration: 5 },
+      { slug: "surveying-geoinformatics",  name: "Surveying and Geoinformatics",   duration: 5 }
+    ]
+  },
+  {
+    slug: "arts",
+    name: "Faculty of Arts",
+    shortName: "FARTS",
+    degree: "B.A",
+    icon: "📚",
+    accentPink: false,
+    description: "Language, literature, performing arts, film and religious studies.",
+    departments: [
+      { slug: "english-literary",     name: "English & Literary Studies",      duration: 4 },
+      { slug: "performing-arts-film", name: "Performing Arts & Film Studies",  duration: 4 },
+      { slug: "religious-studies",    name: "Religious Studies",               duration: 4 }
+    ]
+  },
+  {
+    slug: "education",
+    name: "Faculty of Education",
+    shortName: "FEDU",
+    degree: "B.Ed",
+    icon: "🎓",
+    accentPink: true,
+    description: "Teacher education across sciences, arts, technology and management.",
+    departments: [
+      { slug: "biology-edu",          name: "Biology Education",          duration: 4 },
+      { slug: "chemistry-edu",        name: "Chemistry Education",        duration: 4 },
+      { slug: "physics-edu",          name: "Physics Education",          duration: 4 },
+      { slug: "computer-science-edu", name: "Computer Science Education", duration: 4 },
+      { slug: "mathematics-edu",      name: "Mathematics Education",      duration: 4 },
+      { slug: "physical-health-edu",  name: "Physical & Health Education",duration: 4 },
+      { slug: "english-edu",          name: "English Education",          duration: 4 },
+      { slug: "educational-mgt",      name: "Educational Management",     duration: 4 },
+      { slug: "social-studies-edu",   name: "Social Studies Education",   duration: 4 },
+      { slug: "business-studies-edu", name: "Business Studies Education", duration: 4 }
+    ]
+  },
+  {
+    slug: "college-of-medicine",
+    name: "College of Medicine",
+    shortName: "COM",
+    degree: "MBBS / B.Sc",
+    icon: "🩺",
+    accentPink: false,
+    description: "Basic medical sciences, clinical sciences and public health programmes.",
+    subgroups: [
+      {
+        label: "Basic Medical Sciences",
+        departments: [
+          { slug: "human-anatomy",        name: "Human Anatomy",                        duration: 4 },
+          { slug: "physiology",           name: "Physiology",                           duration: 4 },
+          { slug: "biochemistry",         name: "Biochemistry",                         duration: 4 },
+          { slug: "medical-micro-para",   name: "Medical Microbiology & Parasitology",  duration: 4 },
+          { slug: "pharmacology",         name: "Pharmacology",                         duration: 4 }
+        ]
+      },
+      {
+        label: "Clinical Sciences",
+        departments: [
+          { slug: "nursing",              name: "Nursing",                              duration: 5 },
+          { slug: "medical-radiography",  name: "Medical Radiography",                 duration: 5 },
+          { slug: "physiotherapy",        name: "Physiotherapy",                       duration: 5 },
+          { slug: "medical-lab-science",  name: "Medical Laboratory Science",          duration: 5 },
+          { slug: "dentistry",            name: "Dentistry",                           duration: 6 },
+          { slug: "medicine",             name: "Medicine",                            duration: 6 }
+        ]
+      },
+      {
+        label: "Public Health",
+        departments: [
+          { slug: "human-nutrition",      name: "Human Nutrition & Dietetics",         duration: 4 },
+          { slug: "community-health",     name: "Community Health",                    duration: 4 },
+          { slug: "health-promotion",     name: "Health Promotion & Education",        duration: 4 },
+          { slug: "health-info-mgt-ph",   name: "Health Information Management",       duration: 4 },
+          { slug: "preventive-medicine",  name: "Preventive Medicine & Primary Care",  duration: 4 },
+          { slug: "health-policy",        name: "Health Policy & Management",          duration: 4 },
+          { slug: "env-health-sciences",  name: "Environmental Health Sciences",       duration: 4 }
+        ]
+      }
+    ],
+    get departments() {
+      return this.subgroups.flatMap(function(g) { return g.departments; });
+    }
+  },
+  {
+    slug: "pharmacy",
+    name: "Faculty of Pharmacy",
+    shortName: "FPHARM",
+    degree: "Pharm.D",
+    icon: "💊",
+    accentPink: true,
+    description: "Pharmaceutical sciences, drug development and clinical pharmacy.",
+    departments: [
+      { slug: "pharmacy", name: "Pharmacy (Doctor of Pharmacy)", duration: 6 }
     ]
   }
 ];
 
-// ─── RESOURCES ───────────────────────────────────────────────────────────────
-// Add real resources here. drive_link = Google Drive shareable URL.
+// ─── RESOURCES ────────────────────────────────────────────────────────────────
+// Add materials here once uploaded to Google Drive.
 // type: "notes" | "past" | "text" | "slides" | "research"
 
-const RESOURCES = [
-  {
-    id: 1,
-    title: "Data Structures & Algorithms Notes",
-    course: "CSC 201",
-    type: "notes",
-    level: "200",
-    faculty_slug: "applied-sciences",
-    dept_slug: "computer-info-science",
-    semester: "1",
-    uploaded: "Jan 2025",
-    drive_link: "#"
-  },
-  {
-    id: 2,
-    title: "Introduction to AI — Past Questions (2020–2024)",
-    course: "CSC 302",
-    type: "past",
-    level: "300",
-    faculty_slug: "applied-sciences",
-    dept_slug: "computer-info-science",
-    semester: "2",
-    uploaded: "Feb 2025",
-    drive_link: "#"
-  },
-  {
-    id: 3,
-    title: "Big Data Computing Lecture Slides",
-    course: "DTS 312",
-    type: "slides",
-    level: "300",
-    faculty_slug: "applied-sciences",
-    dept_slug: "computer-info-science",
-    semester: "2",
-    uploaded: "Mar 2025",
-    drive_link: "#"
-  },
-  {
-    id: 4,
-    title: "Statistics for Data Science Textbook",
-    course: "DTS 212",
-    type: "text",
-    level: "200",
-    faculty_slug: "applied-sciences",
-    dept_slug: "computer-info-science",
-    semester: "2",
-    uploaded: "Apr 2025",
-    drive_link: "#"
-  },
-  {
-    id: 5,
-    title: "Network Security Fundamentals Notes",
-    course: "CYB 201",
-    type: "notes",
-    level: "200",
-    faculty_slug: "applied-sciences",
-    dept_slug: "cyber-security",
-    semester: "1",
-    uploaded: "Mar 2025",
-    drive_link: "#"
-  },
-  {
-    id: 6,
-    title: "Software Engineering Principles — Past Q.",
-    course: "SEN 301",
-    type: "past",
-    level: "300",
-    faculty_slug: "applied-sciences",
-    dept_slug: "software-engineering",
-    semester: "1",
-    uploaded: "Apr 2025",
-    drive_link: "#"
-  },
-  {
-    id: 7,
-    title: "Circuit Analysis & Electronics Notes",
-    course: "EEE 201",
-    type: "notes",
-    level: "200",
-    faculty_slug: "engineering",
-    dept_slug: "electrical-electronics",
-    semester: "1",
-    uploaded: "Feb 2025",
-    drive_link: "#"
-  },
-  {
-    id: 8,
-    title: "Constitutional Law Past Questions",
-    course: "LAW 301",
-    type: "past",
-    level: "300",
-    faculty_slug: "law",
-    dept_slug: "bachelor-of-laws",
-    semester: "1",
-    uploaded: "Jan 2025",
-    drive_link: "#"
-  }
-];
+const RESOURCES = [];
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
+
 function getFacultyBySlug(slug) {
-  return FACULTIES.find(f => f.slug === slug) || null;
+  return FACULTIES.find(function(f) { return f.slug === slug; }) || null;
 }
 
 function getDepartmentBySlug(faculty, deptSlug) {
-  return faculty?.departments.find(d => d.slug === deptSlug) || null;
+  if (!faculty) return null;
+  return faculty.departments.find(function(d) { return d.slug === deptSlug; }) || null;
 }
 
 function getResourcesFor(facultySlug, deptSlug) {
-  return RESOURCES.filter(r => r.faculty_slug === facultySlug && r.dept_slug === deptSlug);
+  return RESOURCES.filter(function(r) {
+    return r.faculty_slug === facultySlug && r.dept_slug === deptSlug;
+  });
 }
-
-function getAllResources() { return RESOURCES; }
 
 function searchResources(query) {
-  const q = query.toLowerCase().trim();
-  if (!q) return [];
-  return RESOURCES.filter(r =>
-    r.title.toLowerCase().includes(q) ||
-    r.course.toLowerCase().includes(q) ||
-    r.type.toLowerCase().includes(q)
-  );
+  var q = query.toLowerCase().trim();
+  if (!q) return RESOURCES;
+  return RESOURCES.filter(function(r) {
+    return r.title.toLowerCase().includes(q) ||
+           r.course.toLowerCase().includes(q) ||
+           r.type.toLowerCase().includes(q) ||
+           r.level.includes(q);
+  });
 }
 
-const TYPE_LABEL = { notes: "Course Notes", past: "Past Questions", text: "Textbook", slides: "Slides", research: "Research" };
-const TYPE_CLASS = { notes: "tag-notes", past: "tag-past", text: "tag-text", slides: "tag-slides", research: "tag-research" };
+function getLevelsForDuration(duration) {
+  var levels = [];
+  for (var i = 1; i <= duration; i++) {
+    levels.push(i * 100);
+  }
+  return levels;
+}
+
+const TYPE_LABEL = {
+  notes:    "Course Notes",
+  past:     "Past Questions",
+  text:     "Textbook",
+  slides:   "Slides",
+  research: "Research"
+};
+
+const TYPE_CLASS = {
+  notes:    "tag-notes",
+  past:     "tag-past",
+  text:     "tag-text",
+  slides:   "tag-slides",
+  research: "tag-research"
+};

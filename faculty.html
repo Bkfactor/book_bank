@@ -5,13 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Faculty · Lead City Book Bank</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .subgroup-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gray-400);
+    margin: 28px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .subgroup-label:first-child { margin-top: 0; }
+</style>
 </head>
 <body data-page="faculty">
 
 <div id="nav-slot"></div>
-
 <div class="breadcrumb" id="breadcrumb"></div>
-
 <section class="page-hero" id="faculty-hero"></section>
 
 <div class="container">
@@ -19,14 +26,13 @@
     <div class="section-head">
       <h2>Select a <span>Department</span></h2>
     </div>
-    <div class="dept-grid" id="dept-grid">
+    <div id="dept-container">
       <!-- Rendered by JS -->
     </div>
   </section>
 </div>
 
 <div id="footer-slot"></div>
-
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 </body>
